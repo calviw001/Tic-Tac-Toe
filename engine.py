@@ -30,5 +30,26 @@ def get_move() -> tuple:
     return (row_num, column_num)
 
 
+def is_move_valid(move: tuple, board: list) -> bool:
+    # Move is of length 2
+    if len(move) == 2:
+        row_num = move[0]
+        column_num = move[1]
+        # Move consists of numbers
+        try:
+            row_num = int(move[0])
+            column_num = int(move[1])
+        except ValueError:
+            return False
+        # Move numbers are in bounds
+        if not (0 <= row_num < 3 and 0 <= column_num < 3):
+            return False
+        # Move is not taken already
+        if board[row_num][column_num] is not None:
+            return False
+        return True
+    else:
+        return False
+
 # print_board(create_board())
 # print(get_move())
