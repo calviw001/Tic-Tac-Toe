@@ -63,5 +63,25 @@ def is_board_full(board: list) -> bool:
     return True 
 
 
+def check_winner(board: list):
+    winning_piece = None
+    # Check rows
+    for row_num in range(3):
+        if board[row_num][0] == board[row_num][1] == board[row_num][2] and board[row_num][0] is not None:
+            winning_piece = board[row_num][0]
+            return winning_piece
+    # Check columns
+    for column_num in range(3):
+        if board[0][column_num] == board[1][column_num] == board[2][column_num] and board[0][column_num] is not None:
+            winning_piece = board[0][column_num]
+            return winning_piece
+    # Check diagonals
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
+        winning_piece = board[0][0]
+    elif board[0][2] == board[1][1] == board[2][0] and board[0][0] is not None:
+        winning_piece = board[0][2]
+    return winning_piece
+
+
 # print_board(create_board())
 # print(get_move())
