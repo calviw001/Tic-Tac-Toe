@@ -24,4 +24,11 @@ def print_board(board: list) -> None:
             print("   ---------")
 
 
+def get_move() -> tuple:
+    row_num = input("Enter row number: ")
+    column_num = input("Enter column number: ")
+    return (row_num, column_num)
+
+
 # print_board(create_board())
+# print(get_move())
