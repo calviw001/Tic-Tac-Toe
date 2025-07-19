@@ -30,6 +30,25 @@ class TestGameEngine(unittest.TestCase):
         result = engine.get_move()
         self.assertEqual(result, ('0', '2'))
 
+    
+    def test_is_move_valid(self):
+        # Test move validation
+        board = engine.create_board()
+        
+        self.assertTrue(engine.is_move_valid(('0', '0'), board))
+        self.assertTrue(engine.is_move_valid(('1', '2'), board))
+        
+        self.assertFalse(engine.is_move_valid(('-1', '0'), board))
+        self.assertFalse(engine.is_move_valid(('4', '1'), board))
+        
+        self.assertFalse(engine.is_move_valid(('a', '1'), board))
+        
+        board[1][1] = 'X'
+        self.assertFalse(engine.is_move_valid(('1', '1'), board))
+        
+        self.assertFalse(engine.is_move_valid(('1'), board))
+        self.assertFalse(engine.is_move_valid(('1', '2', '3'), board))
+
 
 if __name__ == '__main__':
     unittest.main()
