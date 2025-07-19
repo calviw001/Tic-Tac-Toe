@@ -3,14 +3,16 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import unittest
-from engine import create_board
+from unittest.mock import patch
+from io import StringIO
+import engine
 
 
 class TestGameEngine(unittest.TestCase):
 
     def test_board_structure(self):
         # Test the exact structure of the board
-        board = create_board()
+        board = engine.create_board()
         expected = [
             [None, None, None],
             [None, None, None],
@@ -20,6 +22,13 @@ class TestGameEngine(unittest.TestCase):
         for row in board:
             for cell in row:
                 self.assertIsNone(cell)
+
+
+    @patch('builtins.input', side_effect=['0', '2'])
+    def test_get_move(self, mock_input):
+        # Test that get_move returns correct tuple with normal input
+        result = engine.get_move()
+        self.assertEqual(result, ('0', '2'))
 
 
 if __name__ == '__main__':
