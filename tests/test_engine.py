@@ -59,5 +59,23 @@ class TestGameEngine(unittest.TestCase):
         self.assertEqual(board[0][2], 'O')
 
 
+    def test_is_board_full(self):
+        # Test checking of a board is full or not
+        board = [[None, None, None],
+                 [None, None, None],
+                 [None, None, None]]
+        self.assertFalse(engine.is_board_full(board))
+    
+        board = [['X', None, 'O'],
+                 [None, 'X', None],
+                 ['O', None, 'X']]
+        self.assertFalse(engine.is_board_full(board))
+    
+        board = [['X', 'O', 'X'],
+                 ['O', 'X', 'O'],
+                 ['O', 'X', 'O']]
+        self.assertTrue(engine.is_board_full(board))
+
+
 if __name__ == '__main__':
     unittest.main()
