@@ -50,5 +50,14 @@ class TestGameEngine(unittest.TestCase):
         self.assertFalse(engine.is_move_valid(('1', '2', '3'), board))
 
 
+    def test_update_move(self):
+        # Test updating board with move
+        board = engine.create_board()
+        engine.update_board(('1', '1'), board, 'X')
+        self.assertEqual(board[1][1], 'X')
+        engine.update_board(('0', '2'), board, 'O')
+        self.assertEqual(board[0][2], 'O')
+
+
 if __name__ == '__main__':
     unittest.main()

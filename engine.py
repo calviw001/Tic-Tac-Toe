@@ -50,6 +50,10 @@ def is_move_valid(move: tuple, board: list) -> bool:
         return True
     else:
         return False
+    
+
+def update_board(move: tuple, board: list, player_piece: str) -> None:
+    board[int(move[0])][int(move[1])] = player_piece
 
 # print_board(create_board())
 # print(get_move())
