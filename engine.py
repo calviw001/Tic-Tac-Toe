@@ -16,7 +16,11 @@ def print_board(board: list) -> None:
         print(f"{row_num}", end=" ")
         for column_num in range(3):
             cell = board[row_num][column_num]
-            print(f"{cell if cell else ' - '}", end="")
+            #print(f"{cell if cell else ' - '}", end="")
+            if cell:
+                print(f" {cell} ", end="")
+            else:
+                print(f" - ", end="")
             if column_num < 2:
                 print("|", end="")
         print()
@@ -25,8 +29,8 @@ def print_board(board: list) -> None:
 
 
 def get_move() -> tuple:
-    row_num = input("Enter row number: ")
-    column_num = input("Enter column number: ")
+    row_num = input("Enter row number: ").strip()
+    column_num = input("Enter column number: ").strip()
     return (row_num, column_num)
 
 
