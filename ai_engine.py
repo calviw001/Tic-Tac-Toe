@@ -21,3 +21,11 @@ def get_all_available_moves(board: list) -> list:
             if board[row_num][column_num] is None:
                 available_moves.append((row_num, column_num))
     return available_moves
+
+
+def make_board_copy(board: list) -> list:
+    board_copy = engine.create_board()
+    for row_num in range(3):
+        for column_num in range(3):
+            board_copy[row_num][column_num] = board[row_num][column_num]
+    return board_copy

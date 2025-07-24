@@ -37,5 +37,42 @@ class TestAIGameEngine(unittest.TestCase):
         self.assertEqual(ai_engine.get_all_available_moves(board), expected)
 
 
+    def test_copying_a_board(self):
+        # Copy an empty board
+        board = [[None, None, None],
+                 [None, None, None],
+                 [None, None, None]]
+        board_copy = ai_engine.make_board_copy(board)
+        self.assertEqual(board_copy, board)
+        self.assertIsNot(board_copy, board)
+        for row in range(3):
+            self.assertIsNot(board_copy[row], board[row])  
+        # Copy a partially filled board
+        board = [['X', None, 'O'],
+                 [None, 'X', None],
+                 ['O', None, 'X']]
+        board_copy = ai_engine.make_board_copy(board)
+        self.assertEqual(board_copy, board)
+        self.assertIsNot(board_copy, board)
+        for row in range(3):
+            self.assertIsNot(board_copy[row], board[row])
+        # Copy a full board
+        board = [['X', 'O', 'X'],
+                 ['O', 'X', 'O'],
+                 ['O', 'X', 'O']]
+        board_copy = ai_engine.make_board_copy(board)
+        self.assertEqual(board_copy, board)
+        self.assertIsNot(board_copy, board)
+        # Modifying the copy does not affect the original board
+        board = [['X', None, None],
+                 [None, None, None],
+                 [None, None, None]]
+        board_copy = ai_engine.make_board_copy(board)
+        board_copy[0][1] = 'O'
+        board_copy[1][1] = 'X'
+        self.assertEqual(board[0][1], None)
+        self.assertEqual(board[1][1], None)
+
+
 if __name__ == '__main__':
     unittest.main()
