@@ -29,3 +29,32 @@ def make_board_copy(board: list) -> list:
         for column_num in range(3):
             board_copy[row_num][column_num] = board[row_num][column_num]
     return board_copy
+
+
+def minimax_score(board: list, current_player_piece: str) -> int:
+    # player_piece = 'X'
+    # ai_piece = 'O'
+    # Base cases
+    if engine.check_winner(board):
+        winning_piece = engine.check_winner(board)
+        if winning_piece == 'X':
+            return -10
+        else:
+            return 10
+    elif engine.is_board_full(board):
+        return 0
+    # Recursive case
+    all_moves = get_all_available_moves(board)
+    scores = []
+    for each_move in all_moves:
+        new_board = make_board_copy(board)
+        engine.update_board(each_move, new_board, current_player_piece)
+        if current_player_piece == 'X':
+            score = minimax_score(new_board, 'O')
+        else:
+            score = minimax_score(new_board, 'X')
+        scores.append(score)
+    if current_player_piece == 'X':
+        return min(scores)
+    else:
+        return max(scores)
