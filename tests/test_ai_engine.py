@@ -74,5 +74,46 @@ class TestAIGameEngine(unittest.TestCase):
         self.assertEqual(board[1][1], None)
 
 
+    def test_assigning_scores_to_board(self):
+        # player_piece = 'X'
+        # ai_piece = 'O'
+        # Board is a loss for the AI
+        board = [['X', None, None],
+                 [None, 'X', None],
+                 [None, None, 'X']]
+        score = ai_engine.minimax_score(board, 'O')
+        self.assertEqual(score, -10)
+        # Board is a win for AI
+        board = [['O', None, None],
+                 [None, 'O', None],
+                 [None, None, 'O']]
+        score = ai_engine.minimax_score(board, 'X')
+        self.assertEqual(score, 10)
+        # Board is a draw
+        board = [['X', 'X', 'O'],
+                 ['O', 'O', 'X'],
+                 ['X', 'O', 'X']]
+        score = ai_engine.minimax_score(board, 'O')
+        self.assertEqual(score, 0)
+        # Board will result in AI winning with optimal play on AI's turn
+        board = [['O', None, None],
+                 ['X', 'O', None],
+                 ['X', 'X', None]]
+        score = ai_engine.minimax_score(board, 'O')
+        self.assertEqual(score, 10)
+        # Board will result in player winning with optimal play on player's turn
+        board = [['X', None, 'X'],
+                 ['O', None, None],
+                 ['O', 'X', None]]
+        score = ai_engine.minimax_score(board, 'X')
+        self.assertEqual(score, -10)
+        # Board will result in draw with optimal play on player's turn
+        board = [['X', 'O', 'X'],
+                 ['O', 'O', None],
+                 ['O', 'X', None]]
+        score = ai_engine.minimax_score(board, 'X')
+        self.assertEqual(score, 0)
+
+
 if __name__ == '__main__':
     unittest.main()
