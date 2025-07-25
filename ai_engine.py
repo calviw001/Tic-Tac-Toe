@@ -58,3 +58,18 @@ def minimax_score(board: list, current_player_piece: str) -> int:
         return min(scores)
     else:
         return max(scores)
+
+
+def get_move_ai(board: list) -> tuple:
+    move = None
+    move_score = -99
+    ai_piece = 'O' 
+    all_moves = get_all_available_moves(board)
+    for each_move in all_moves:
+        new_board = make_board_copy(board)
+        engine.update_board(each_move, new_board, ai_piece)
+        current_move_score = minimax_score(new_board, ai_piece)
+        if current_move_score > move_score:
+            move = each_move
+            move_score = current_move_score
+    return move
