@@ -40,7 +40,7 @@ def play() -> None:
         else:
             engine.print_board(board)
             print("\nAI's turn (O)")
-            ai_move = ai_engine.get_move_ai_temp(board)
+            ai_move = ai_engine.get_move_ai(board)
             engine.update_board(ai_move, board, ai_piece)
             current_player = 'Player'
         # Check for winner or tie
