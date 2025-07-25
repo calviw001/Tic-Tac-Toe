@@ -115,5 +115,37 @@ class TestAIGameEngine(unittest.TestCase):
         self.assertEqual(score, 0)
 
 
+    def test_get_optimal_move_from_ai(self):
+        # player_piece = 'X'
+        # ai_piece = 'O'
+        # Any move is optimal on empty board
+        board = [[None, None, None],
+                 [None, None, None],
+                 [None, None, None]]
+        move = ai_engine.get_move_ai(board)
+        self.assertIn(move, [(0, 0), (0, 2), (1, 1), (2, 0), (2, 2)])
+        # AI should take winning cell
+        board = [['O', 'O', None],
+                 ['X', 'X', None],
+                 [None, None, None]]
+        self.assertEqual(ai_engine.get_move_ai(board), (0, 2))
+        # AI should block opponent from winning
+        board = [['X', 'X', None],
+                 ['O', None, None],
+                 [None, None, None]]
+        self.assertEqual(ai_engine.get_move_ai(board), (0, 2))
+        # AI should take the only cell available 
+        board = [['O', 'X', 'O'],
+                 ['X', 'X', 'O'],
+                 ['O', 'O', None]]
+        self.assertEqual(ai_engine.get_move_ai(board), (2, 2))
+        # AI will take up a cell to prevent opponent from having two pieces in a row
+        board = [['X', None, None],
+                 [None, 'O', None],
+                 [None, None, 'X']]
+        move = ai_engine.get_move_ai(board)
+        self.assertIn(move, [(0, 1), (1, 0), (1, 2), (2, 1)])
+
+
 if __name__ == '__main__':
     unittest.main()
