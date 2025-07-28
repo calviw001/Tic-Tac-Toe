@@ -98,15 +98,21 @@ def get_move_ai(board: list) -> tuple:
     move = None
     move_score = -99
     ai_piece = 'O' 
+    chosen_board = None
     all_moves = get_all_available_moves(board)
     for each_move in all_moves:
         new_board = make_board_copy(board)
-        # engine.update_board(each_move, new_board, ai_piece)
-        # engine.print_board(new_board)
+        engine.update_board(each_move, new_board, ai_piece)
         current_move_score = minimax_score(new_board, ai_piece)
+        # engine.print_board(new_board)
         # print(current_move_score)
         # print()
-        if current_move_score > move_score:
+        if current_move_score > move_score and move is None:
             move = each_move
             move_score = current_move_score
+            chosen_board = new_board
+        elif engine.check_winner(chosen_board) != 'O' and check_two_in_a_row(new_board) != 'Player' and check_two_in_a_row(new_board) != 'Both' and current_move_score >= move_score:
+            move = each_move
+            move_score = current_move_score
+            chosen_board = new_board
     return move
