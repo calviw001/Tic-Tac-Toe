@@ -189,10 +189,14 @@ class TestAIGameEngine(unittest.TestCase):
                  ['O', None, None],
                  [None, None, None]]
         self.assertEqual(ai_engine.get_move_ai(board), (0, 2))
-        # board = [['O', 'X', None],
-        #          [None, 'X', None],
-        #          [None, None, None]]
-        # self.assertEqual(ai_engine.get_move_ai(board), (2, 1))
+        board = [['O', 'X', None],
+                 [None, 'X', None],
+                 [None, None, None]]
+        self.assertEqual(ai_engine.get_move_ai(board), (2, 1))
+        board = [['X', 'O', None],
+                 [None, 'X', None],
+                 [None, None, None]]
+        self.assertEqual(ai_engine.get_move_ai(board), (2, 2))
         # AI should take the only cell available 
         board = [['O', 'X', 'O'],
                  ['X', 'X', 'O'],
