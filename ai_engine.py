@@ -107,7 +107,7 @@ def get_move_ai(board: list) -> tuple:
         # engine.print_board(new_board)
         # print(current_move_score)
         # print()
-        if current_move_score > move_score and move is None:
+        if current_move_score > move_score and move is None or engine.check_winner(new_board) == 'O':
             move = each_move
             move_score = current_move_score
             chosen_board = new_board

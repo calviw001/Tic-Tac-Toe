@@ -184,6 +184,10 @@ class TestAIGameEngine(unittest.TestCase):
                  ['X', 'X', None],
                  [None, None, None]]
         self.assertEqual(ai_engine.get_move_ai(board), (0, 2))
+        board = [[None, None, None],
+                 [None, 'X', 'X'],
+                 [None, 'O', 'O']]
+        self.assertEqual(ai_engine.get_move_ai(board), (2, 0))
         # AI should block opponent from winning
         board = [['X', 'X', None],
                  ['O', None, None],
