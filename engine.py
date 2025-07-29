@@ -82,7 +82,7 @@ def check_winner(board: list):
     # Check diagonals
     if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
         winning_piece = board[0][0]
-    elif board[0][2] == board[1][1] == board[2][0] and board[0][0] is not None:
+    elif board[0][2] == board[1][1] == board[2][0] and board[0][2] is not None:
         winning_piece = board[0][2]
     return winning_piece
 
