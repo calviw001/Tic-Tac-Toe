@@ -48,9 +48,9 @@ def play() -> None:
         if has_winner:
             engine.print_board(board)
             if has_winner == 'X':
-                print("You win!")
+                print("You win! Good job!")
             else:
-                print("You lose!")
+                print("You lose! Sorry :(")
             break
         elif engine.is_board_full(board):
             engine.print_board(board)
